@@ -19,5 +19,13 @@ public abstract class Personajes {
         return posi.getY();
     }
 
+    public Posicion getPosi() {
+        return posi;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
     public abstract String toString();
 }
