@@ -1,7 +1,5 @@
 package juego.posicion;
 
-
-
 public class Posicion {
     private int x;
     private int y;
@@ -25,7 +23,7 @@ public class Posicion {
         this.y = y;
     }
 
-    public double calcularDistancia(Posicion personaje1, Posicion personaje2){
+    public static double calcularDistancia(Posicion personaje1, Posicion personaje2){
         return Math.sqrt(Math.pow(personaje1.getX()-personaje2.getX(), 2) + Math.pow(personaje1.getY()-personaje2.getY(), 2));
     }
 }

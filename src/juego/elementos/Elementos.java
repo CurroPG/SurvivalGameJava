@@ -4,11 +4,11 @@ import juego.posicion.Posicion;
 
 public abstract class Elementos {
     protected Posicion posi;
-    protected int vida;
+    protected Elementos objetivo;
 
-    public Elementos(int vida, int x, int y) {
+    public Elementos(Elementos objetivo, int x, int y) {
     this.posi = new Posicion(x, y);
-    this.vida = vida;
+    this.objetivo = objetivo;
     }
 
     public int getPosiX() {
@@ -23,9 +23,10 @@ public abstract class Elementos {
         return posi;
     }
 
-    public int getVida() {
-        return vida;
+    public void setObjetivo(Elementos objetivo) {
+        this.objetivo = objetivo;
     }
 
     public abstract String toString();
+
 }

@@ -5,11 +5,11 @@ package juego.elementos;
 public class Obstaculos extends Elementos{
 
     public Obstaculos(int x, int y){
-        super(0, x, y);
+        super(null, x, y);
     }
     
     @Override
     public String toString() {
-        return "*";
+        return "█";
     }
 }
