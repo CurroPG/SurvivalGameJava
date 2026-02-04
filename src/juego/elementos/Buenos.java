@@ -1,8 +1,5 @@
 package juego.elementos;
 
-import juego.posicion.Posicion;
-import juego.movimientos.Huir;
-
 public class Buenos extends Elementos {
     public static final String	GREEN= "\u001B[32m";
     public static final String	RESET= "\u001B[0m";

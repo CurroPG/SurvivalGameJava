@@ -1,7 +1,5 @@
 package juego.elementos;
 
-import juego.posicion.Posicion;
-
 public class Malos extends Elementos {
     public static final String	RED= "\u001B[31m";
     public static final String	RESET= "\u001B[0m";
