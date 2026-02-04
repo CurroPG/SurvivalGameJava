@@ -1,6 +1,5 @@
 package juego.elementos;
 
-import juego.movimientos.Movimiento;
 import juego.movimientos.Perseguir;
 
 public class Malos extends Elementos {

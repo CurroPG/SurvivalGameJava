@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import juego.elementos.Buenos;
 import juego.elementos.Malos;
 import juego.elementos.Obstaculos;
-import juego.movimientos.Huir;
-import juego.movimientos.Movimiento;
 import juego.elementos.Elementos;
 
 public class Mapa implements Rellenar {
@@ -22,6 +20,8 @@ public class Mapa implements Rellenar {
         this.alto = alto;
         this.ancho = ancho;
         this.mapa = new Elementos[alto][ancho];
+        this.buenos = new ArrayList<>();
+        this.malos = new ArrayList<>();
     }
 
     public int getAlto() {
@@ -73,10 +73,14 @@ public class Mapa implements Rellenar {
         generarObstaculos();
     }
 
+    //Comprobacion de casillas para que no se repita
+
     @Override
     public boolean comprobarCasillas(int x, int y) {
         return mapa[y][x] != null;
     }
+
+    //Generador de elementos del mapa
 
     @Override
     public void generarObstaculos() {
@@ -112,7 +116,7 @@ public class Mapa implements Rellenar {
 
     @Override
     public void generarMalos() {
-        int numMalos = (int) (Math.random() * (getArea() * 0.02) + 1);
+        int numMalos = (int) (Math.random() * (getArea() * 0.01) + 1);
         int x = 0;
         int y = 0;
 
@@ -126,6 +130,8 @@ public class Mapa implements Rellenar {
             malos.add(malo);
         }
     }
+
+    //Localizadores de enemigos
 
     private Malos localizarMaloCercano(Buenos bueno){
         Malos cercano = null;
@@ -154,4 +160,6 @@ public class Mapa implements Rellenar {
         }
         return cercano;
     }
+
+    //Metodo que va refrescando el mapa por cada iteraccion
 }

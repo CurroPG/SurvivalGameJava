@@ -13,9 +13,9 @@ public class Huir implements Movimiento{
         if(distanciaEntreAmbos > DISTANCIA_SEGURA)
             return new Posicion(actual.getX(), actual.getY());
         do{
-            vx = (int)((Math.random()*3-1)*(Math.random()*2+1));
-            vy = (int)((Math.random()*3-1)*(Math.random()*2+1));
-        }while(vy == 0 || vx == 0);
+            vx = (int)(Math.random()*2-1);
+            vy = (int)(Math.random()*2-1);
+        }while(vy == 0 && vx == 0);
         return new Posicion(actual.getX()+vx, actual.getY()+vy);
     }
 }

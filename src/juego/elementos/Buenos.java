@@ -1,7 +1,6 @@
 package juego.elementos;
 
 import juego.movimientos.Huir;
-import juego.movimientos.Movimiento;
 
 public class Buenos extends Elementos {
     public static final String	GREEN= "\u001B[32m";

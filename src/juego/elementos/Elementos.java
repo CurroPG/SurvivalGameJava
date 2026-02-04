@@ -31,4 +31,11 @@ public abstract class Elementos {
 
     public abstract String toString();
 
+    public void mover(){
+        if(objetivo != null){
+            Posicion nuevaPosi = tipoMovimiento.mover(this.posi, objetivo.getPosi());
+            this.posi = nuevaPosi;
+        }
+    }
+
 }
