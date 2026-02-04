@@ -1,4 +1,4 @@
-package juego.mapa.rellenar;
+package juego.mapa;
 
 public interface Rellenar {
     public boolean comprobarCasillas(int x, int y);

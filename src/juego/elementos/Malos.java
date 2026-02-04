@@ -2,7 +2,7 @@ package juego.elementos;
 
 
 
-public class Malos extends Personajes {
+public class Malos extends Elementos {
     
     public Malos(int vida, int x, int y){
         super(vida, x, y);

@@ -2,11 +2,11 @@ package juego.elementos;
 
 import juego.posicion.Posicion;
 
-public abstract class Personajes {
+public abstract class Elementos {
     protected Posicion posi;
     protected int vida;
 
-    public Personajes(int vida, int x, int y) {
+    public Elementos(int vida, int x, int y) {
     this.posi = new Posicion(x, y);
     this.vida = vida;
     }

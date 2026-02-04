@@ -3,18 +3,17 @@ package juego.mapa;
 import juego.elementos.Buenos;
 import juego.elementos.Malos;
 import juego.elementos.Obstaculos;
-import juego.elementos.Personajes;
-import juego.mapa.rellenar.Rellenar;
+import juego.elementos.Elementos;
 
 public class Mapa implements Rellenar{
     private int alto;
     private int ancho;
-    private Personajes mapa[][];
+    private Elementos mapa[][];
 
     public Mapa(int alto, int ancho) {
         this.alto = alto;
         this.ancho = ancho;
-        this.mapa = new Personajes[alto][ancho];
+        this.mapa = new Elementos[alto][ancho];
     }
 
     public int getAlto() {
