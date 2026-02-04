@@ -1,12 +1,15 @@
 package juego.elementos;
 
+import juego.movimientos.Movimiento;
+import juego.movimientos.Perseguir;
+
 public class Malos extends Elementos {
     public static final String	RED= "\u001B[31m";
     public static final String	RESET= "\u001B[0m";
     
 
-    public Malos(Elementos objetivo, int x, int y){
-        super(objetivo, x, y);
+    public Malos(int x, int y){
+        super(x, y, new Perseguir());
     }
 
     @Override

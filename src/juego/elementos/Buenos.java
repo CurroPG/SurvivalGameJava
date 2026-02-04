@@ -1,11 +1,14 @@
 package juego.elementos;
 
+import juego.movimientos.Huir;
+import juego.movimientos.Movimiento;
+
 public class Buenos extends Elementos {
     public static final String	GREEN= "\u001B[32m";
     public static final String	RESET= "\u001B[0m";
 
-    public Buenos(Elementos objetivo, int x, int y){
-        super(objetivo, x, y);
+    public Buenos(int x, int y){
+        super(x, y, new Huir());
     }
 
     @Override

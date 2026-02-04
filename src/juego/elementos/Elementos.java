@@ -1,14 +1,16 @@
 package juego.elementos;
 
+import juego.movimientos.Movimiento;
 import juego.posicion.Posicion;
 
 public abstract class Elementos {
     protected Posicion posi;
     protected Elementos objetivo;
+    protected Movimiento tipoMovimiento;
 
-    public Elementos(Elementos objetivo, int x, int y) {
+    public Elementos(int x, int y, Movimiento tipoMovimiento) {
     this.posi = new Posicion(x, y);
-    this.objetivo = objetivo;
+    this.tipoMovimiento = tipoMovimiento;
     }
 
     public int getPosiX() {

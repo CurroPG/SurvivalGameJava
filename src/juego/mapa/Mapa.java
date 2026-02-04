@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import juego.elementos.Buenos;
 import juego.elementos.Malos;
 import juego.elementos.Obstaculos;
+import juego.movimientos.Huir;
+import juego.movimientos.Movimiento;
 import juego.elementos.Elementos;
 
 public class Mapa implements Rellenar {
@@ -102,8 +104,8 @@ public class Mapa implements Rellenar {
                 x = (int) (Math.random() * ancho);
                 y = (int) (Math.random() * alto);
             } while (comprobarCasillas(x, y));
-            Buenos bueno = new Buenos(null, x, y);
-            // buenos.add(bueno);
+            Buenos bueno = new Buenos(x, y);
+            buenos.add(bueno);
             mapa[y][x] = bueno;
         }
     }
@@ -119,9 +121,9 @@ public class Mapa implements Rellenar {
                 x = (int) (Math.random() * ancho);
                 y = (int) (Math.random() * alto);
             } while (comprobarCasillas(x, y));
-            Malos malo = new Malos(null, x, y);
+            Malos malo = new Malos(x, y);
             mapa[y][x] = malo;
-            // malos.add(malo);
+            malos.add(malo);
         }
     }
 
