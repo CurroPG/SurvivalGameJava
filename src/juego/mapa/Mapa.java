@@ -99,7 +99,7 @@ public class Mapa implements Rellenar {
 
     @Override
     public void generarBuenos() {
-        int numBuenos = 1;/*(int) (Math.random() * (getArea() * 0.02) + 1);*/
+        int numBuenos = (int) (Math.random() * (getArea() * 0.02) + 1);
         int x = 0;
         int y = 0;
 
@@ -116,7 +116,7 @@ public class Mapa implements Rellenar {
 
     @Override
     public void generarMalos() {
-        int numMalos = 1;/*(int) (Math.random() * (getArea() * 0.01) + 1);*/
+        int numMalos = (int) (Math.random() * (getArea() * 0.01) + 1);
         int x = 0;
         int y = 0;
 
@@ -175,16 +175,51 @@ public class Mapa implements Rellenar {
         }
 
         for (Buenos bueno : buenos) {
+            int xVieja = bueno.getPosiX();
+            int yVieja = bueno.getPosiY();
             bueno.mover();
-            if((bueno.getPosiX() >= 0 && bueno.getPosiX() < ancho) && (bueno.getPosiY() >= 0 && bueno.getPosiY() < alto))
-                mapa[bueno.getPosiY()][bueno.getPosiX()] = bueno;
+            if (bueno.getPosiX() < 0 || bueno.getPosiX() >= ancho || bueno.getPosiY() < 0 || bueno.getPosiY() >= alto) {
+                bueno.getPosi().setX(xVieja);
+                bueno.getPosi().setY(yVieja);
+            }
+            
+        }
+
+        eliminarMuertos();
+        for (Buenos bueno : buenos) {
+            mapa[bueno.getPosiY()][bueno.getPosiX()] = bueno;
         }
 
         for (Malos malo : malos) {
+            int xVieja = malo.getPosiX();
+            int yVieja = malo.getPosiY();
             malo.mover();
-            if((malo.getPosiX() >= 0 && malo.getPosiX() < ancho) && (malo.getPosiY() >= 0 && malo.getPosiY() < alto))
-                mapa[malo.getPosiY()][malo.getPosiX()] = malo;
+            if (malo.getPosiX() < 0 || malo.getPosiX() >= ancho || malo.getPosiY() < 0 || malo.getPosiY() >= alto) {
+                malo.getPosi().setX(xVieja);
+                malo.getPosi().setY(yVieja);
+            }
+            mapa[malo.getPosiY()][malo.getPosiX()] = malo;
+        }
+    }
+    
+    // Crear arraylist privada para meter los vivos muertos
+    // con un for each anidado de buenos y malos que vaya comprobando que el malo haya matado o no 
+    private void eliminarMuertos(){
+        ArrayList<Buenos> buenosVivos = new ArrayList<>();
+
+        for (Buenos bueno : buenos) {
+            boolean muerto = false;
+            for (Malos malo : malos) {
+                if((malo.getPosiX() == (bueno.getPosiX() + 1) || malo.getPosiX() == (bueno.getPosiX() - 1)) && 
+                (malo.getPosiY() == bueno.getPosiY() + 1 || malo.getPosiY() == bueno.getPosiY() - 1)){
+                    muerto = true;
+                    break;
+                }
+            }
+            if(!muerto)
+                buenosVivos.add(bueno);
         }
 
+        buenos = buenosVivos;
     }
 }

@@ -9,11 +9,8 @@ public class Perseguir implements Movimiento{
         int vx, vy;
         int x = objetivo.getX() - actual.getX(); 
         int y = objetivo.getY() - actual.getY();
-        
-        do{
-            vx = (x >= 0) ? 1 : -1;
-            vy = ( y >= 0) ? 1 : -1;
-        }while(vy == 0 && vx == 0);
+        vx = (x >= 0) ? 1 : -1;
+        vy = ( y >= 0) ? 1 : -1;
         return new Posicion(actual.getX()+vx, actual.getY()+vy);
     }
     
