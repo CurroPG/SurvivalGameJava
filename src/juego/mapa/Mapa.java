@@ -99,7 +99,7 @@ public class Mapa implements Rellenar {
 
     @Override
     public void generarBuenos() {
-        int numBuenos = (int) (Math.random() * (getArea() * 0.02) + 1);
+        int numBuenos = 1;/*(int) (Math.random() * (getArea() * 0.02) + 1);*/
         int x = 0;
         int y = 0;
 
@@ -116,7 +116,7 @@ public class Mapa implements Rellenar {
 
     @Override
     public void generarMalos() {
-        int numMalos = (int) (Math.random() * (getArea() * 0.01) + 1);
+        int numMalos = 1;/*(int) (Math.random() * (getArea() * 0.01) + 1);*/
         int x = 0;
         int y = 0;
 
@@ -162,4 +162,29 @@ public class Mapa implements Rellenar {
     }
 
     //Metodo que va refrescando el mapa por cada iteraccion
+
+    public void refrescarMapa(){
+        for (Buenos bueno : buenos) {
+            bueno.setObjetivo(localizarMaloCercano(bueno));
+            mapa[bueno.getPosiY()][bueno.getPosiX()] = null;
+        }
+
+        for (Malos malo : malos) {
+            malo.setObjetivo(localizarBuenoCercano(malo));
+            mapa[malo.getPosiY()][malo.getPosiX()] = null;
+        }
+
+        for (Buenos bueno : buenos) {
+            bueno.mover();
+            if((bueno.getPosiX() >= 0 && bueno.getPosiX() < ancho) && (bueno.getPosiY() >= 0 && bueno.getPosiY() < alto))
+                mapa[bueno.getPosiY()][bueno.getPosiX()] = bueno;
+        }
+
+        for (Malos malo : malos) {
+            malo.mover();
+            if((malo.getPosiX() >= 0 && malo.getPosiX() < ancho) && (malo.getPosiY() >= 0 && malo.getPosiY() < alto))
+                mapa[malo.getPosiY()][malo.getPosiX()] = malo;
+        }
+
+    }
 }
