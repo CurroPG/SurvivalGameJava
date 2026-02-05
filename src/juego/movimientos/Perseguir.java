@@ -7,15 +7,13 @@ public class Perseguir implements Movimiento {
     //Metodo con la distancia Manhattan
     @Override
     public Posicion mover(Posicion actual, Posicion objetivo) {
-        if (objetivo == null)
-            return new Posicion(actual.getX(), actual.getY());
         // Probar todas las direcciones posibles
         int[] posiblesX = { -1, 0, 1, -1, 1, -1, 0, 1 };
         int[] posiblesY = { -1, -1, -1, 0, 0, 1, 1, 1 };
 
-        double mejorDistancia = Double.MAX_VALUE;
-        int mejorVx = 0;
-        int mejorVy = 0;
+        double menorDistancia = Double.MAX_VALUE;
+        int vx = 0;
+        int vy = 0;
 
         for (int i = 0; i < posiblesX.length; i++) {
             int nuevaX = actual.getX() + posiblesX[i];
@@ -24,13 +22,13 @@ public class Perseguir implements Movimiento {
             Posicion posicionPrueba = new Posicion(nuevaX, nuevaY);
             double distancia = Posicion.calcularDistancia(posicionPrueba, objetivo);
 
-            if (distancia < mejorDistancia) {
-                mejorDistancia = distancia;
-                mejorVx = posiblesX[i];
-                mejorVy = posiblesY[i];
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                vx = posiblesX[i];
+                vy = posiblesY[i];
             }
         }
-        return new Posicion(actual.getX() + mejorVx, actual.getY() + mejorVy);
+        return new Posicion(actual.getX() + vx, actual.getY() + vy);
     }
 
 }
