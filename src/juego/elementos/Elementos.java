@@ -31,9 +31,21 @@ public abstract class Elementos {
 
     public abstract String toString();
 
-    public void mover(){
+    public boolean esObstaculo() {
+        return false;
+    }
+
+    public boolean esMalo() {
+        return false;
+    }
+
+    public boolean esBueno() {
+        return false;
+    }
+
+    public void mover(Elementos[][] mapa){
         if(objetivo != null){
-            Posicion nuevaPosi = tipoMovimiento.mover(this.posi, objetivo.getPosi());
+            Posicion nuevaPosi = tipoMovimiento.mover(this.posi, objetivo.getPosi(), mapa);
             this.posi = nuevaPosi;
         }
     }

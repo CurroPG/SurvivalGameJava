@@ -14,4 +14,9 @@ public class Buenos extends Elementos {
     public String toString() {
         return GREEN+"█"+RESET;
     }
+
+    @Override
+    public boolean esBueno() {
+        return true;
+    }
 }

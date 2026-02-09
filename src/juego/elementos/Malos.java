@@ -15,4 +15,9 @@ public class Malos extends Elementos {
     public String toString() {
         return RED+"█"+RESET;
     }
+
+    @Override
+    public boolean esMalo() {
+        return true;
+    }
 }

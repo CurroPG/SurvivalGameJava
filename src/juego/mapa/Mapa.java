@@ -73,14 +73,14 @@ public class Mapa implements Rellenar {
         generarObstaculos();
     }
 
-    //Comprobacion de casillas para que no se repita
+    // Comprobacion de casillas para que no se repita
 
     @Override
     public boolean comprobarCasillas(int x, int y) {
         return mapa[y][x] != null;
     }
 
-    //Generador de elementos del mapa
+    // Generador de elementos del mapa
 
     @Override
     public void generarObstaculos() {
@@ -131,15 +131,15 @@ public class Mapa implements Rellenar {
         }
     }
 
-    //Localizadores de enemigos
+    // Localizadores de enemigos
 
-    private Malos localizarMaloCercano(Buenos bueno){
+    private Malos localizarMaloCercano(Buenos bueno) {
         Malos cercano = null;
         double distanciaMinima = Double.MAX_VALUE;
 
         for (Malos malo : malos) {
             double distancia = Posicion.calcularDistancia(malo.getPosi(), bueno.getPosi());
-            if(distancia < distanciaMinima){
+            if (distancia < distanciaMinima) {
                 distanciaMinima = distancia;
                 cercano = malo;
             }
@@ -147,13 +147,13 @@ public class Mapa implements Rellenar {
         return cercano;
     }
 
-    private Buenos localizarBuenoCercano(Malos malo){
+    private Buenos localizarBuenoCercano(Malos malo) {
         Buenos cercano = null;
         double distanciaMinima = Double.MAX_VALUE;
 
         for (Buenos bueno : buenos) {
             double distancia = Posicion.calcularDistancia(malo.getPosi(), bueno.getPosi());
-            if(distancia < distanciaMinima){
+            if (distancia < distanciaMinima) {
                 distanciaMinima = distancia;
                 cercano = bueno;
             }
@@ -161,9 +161,9 @@ public class Mapa implements Rellenar {
         return cercano;
     }
 
-    //Metodo que va refrescando el mapa por cada iteraccion
+    // Metodo que va refrescando el mapa por cada iteraccion
 
-    public void refrescarMapa(){
+    public void refrescarMapa() {
         for (Buenos bueno : buenos) {
             bueno.setObjetivo(localizarMaloCercano(bueno));
             mapa[bueno.getPosiY()][bueno.getPosiX()] = null;
@@ -175,50 +175,40 @@ public class Mapa implements Rellenar {
         }
 
         for (Buenos bueno : buenos) {
-            int xVieja = bueno.getPosiX();
-            int yVieja = bueno.getPosiY();
-            bueno.mover();
-            if (bueno.getPosiX() < 0 || bueno.getPosiX() >= ancho || bueno.getPosiY() < 0 || bueno.getPosiY() >= alto) {
-                bueno.getPosi().setX(xVieja);
-                bueno.getPosi().setY(yVieja);
-            }
-            
+            bueno.mover(mapa);
+        }
+
+        for (Malos malo : malos) {
+            malo.mover(mapa);
         }
 
         eliminarMuertos();
+
         for (Buenos bueno : buenos) {
             mapa[bueno.getPosiY()][bueno.getPosiX()] = bueno;
         }
 
         for (Malos malo : malos) {
-            int xVieja = malo.getPosiX();
-            int yVieja = malo.getPosiY();
-            malo.mover();
-            if ((malo.getPosiX() < 0 || malo.getPosiX() > ancho) || (malo.getPosiY() < 0 || malo.getPosiY() > alto)) {
-                malo.getPosi().setX(xVieja);
-                malo.getPosi().setY(yVieja);
-            }
             mapa[malo.getPosiY()][malo.getPosiX()] = malo;
         }
     }
-    
-    // Crear arraylist privada para meter los vivos con vida y separarlos de los mjuertos
-    // con un for each anidado de buenos y malos que vaya comprobando que el malo haya matado o no 
-    private void eliminarMuertos(){
+
+    // Crear arraylist privada para meter los vivos con vida y separarlos de los
+    // mjuertos
+    // con un for each anidado de buenos y malos que vaya comprobando que el malo
+    // haya matado o no
+    private void eliminarMuertos() {
         ArrayList<Buenos> buenosVivos = new ArrayList<>();
 
         for (Buenos bueno : buenos) {
             boolean muerto = false;
             for (Malos malo : malos) {
-                if((malo.getPosiX() == (bueno.getPosiX() + 1) || malo.getPosiX() == (bueno.getPosiX() - 1)) && 
-                (malo.getPosiY() == (bueno.getPosiY() + 1) || malo.getPosiY() == (bueno.getPosiY() - 1)) &&
-                ((malo.getPosiX() + 1) == bueno.getPosiX() || (malo.getPosiY() - 1) == bueno.getPosiY() &&
-                malo.getPosiX() == bueno.getPosiX() || malo.getPosiY() == bueno.getPosiY())){
+                if (malo.getPosiX() == bueno.getPosiX() && malo.getPosiY() == bueno.getPosiY()) {
                     muerto = true;
                     break;
                 }
             }
-            if(!muerto)
+            if (!muerto)
                 buenosVivos.add(bueno);
         }
 

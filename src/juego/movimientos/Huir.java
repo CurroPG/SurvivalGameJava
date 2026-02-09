@@ -1,22 +1,36 @@
 package juego.movimientos;
 
+import juego.elementos.Elementos;
 import juego.posicion.Posicion;
 
 public class Huir implements Movimiento{
-    private static final double DISTANCIA_SEGURA = 10.0;
 
     @Override
-    public Posicion mover(Posicion actual, Posicion objetivo) {
-        double distanciaEntreAmbos = Posicion.calcularDistancia(actual, objetivo);
-        int vx, vy;
-        int x = objetivo.getX() - actual.getX(); 
-        int y = objetivo.getY() - actual.getY();
-        if(distanciaEntreAmbos > DISTANCIA_SEGURA)
-            return new Posicion(actual.getX(), actual.getY());
-        else{
-            vx = (x <= 0) ? 1 : -1;
-            vy = ( y <= 0) ? 1 : -1;
+    public Posicion mover(Posicion actual, Posicion objetivo, Elementos[][] mapa) {
+        int[] posiblesX = { -1, 0, 1, -1, 1, -1, 0, 1 };
+        int[] posiblesY = { -1, -1, -1, 0, 0, 1, 1, 1 };
+
+        double mayorDistancia = 0;
+        int vx = 0;
+        int vy = 0;
+
+        for (int i = 0; i < posiblesX.length; i++) {
+            int nuevaX = actual.getX() + posiblesX[i];
+            int nuevaY = actual.getY() + posiblesY[i];
+
+            if (nuevaX >= 0 && nuevaX < mapa[0].length && nuevaY >= 0 && nuevaY < mapa.length) {
+                if (mapa[nuevaY][nuevaX] == null || !mapa[nuevaY][nuevaX].esObstaculo()) {
+                    Posicion posicionPrueba = new Posicion(nuevaX, nuevaY);
+                    double distancia = Posicion.calcularDistancia(posicionPrueba, objetivo);
+
+                    if (distancia > mayorDistancia) {
+                        mayorDistancia = distancia;
+                        vx = posiblesX[i];
+                        vy = posiblesY[i];
+                    }
+                }
+            }
         }
-        return new Posicion(actual.getX()+vx, actual.getY()+vy);
+        return new Posicion(actual.getX() + vx, actual.getY() + vy);
     }
 }

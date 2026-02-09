@@ -10,4 +10,9 @@ public class Obstaculos extends Elementos{
     public String toString() {
         return "█";
     }
+
+    @Override
+    public boolean esObstaculo() {
+        return true;
+    }
 }
