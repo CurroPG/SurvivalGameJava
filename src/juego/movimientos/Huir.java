@@ -19,7 +19,7 @@ public class Huir implements Movimiento{
             int nuevaY = actual.getY() + posiblesY[i];
 
             if (nuevaX >= 0 && nuevaX < mapa[0].length && nuevaY >= 0 && nuevaY < mapa.length) {
-                if (mapa[nuevaY][nuevaX] == null || !mapa[nuevaY][nuevaX].esObstaculo()) {
+                if (mapa[nuevaY][nuevaX] == null || (!mapa[nuevaY][nuevaX].esObstaculo() && !mapa[nuevaY][nuevaX].esBueno())) {
                     Posicion posicionPrueba = new Posicion(nuevaX, nuevaY);
                     double distancia = Posicion.calcularDistancia(posicionPrueba, objetivo);
 

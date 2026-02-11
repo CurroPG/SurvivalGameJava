@@ -164,6 +164,7 @@ public class Mapa implements Rellenar {
     // Metodo que va refrescando el mapa por cada iteraccion
 
     public void refrescarMapa() {
+
         for (Buenos bueno : buenos) {
             bueno.setObjetivo(localizarMaloCercano(bueno));
             mapa[bueno.getPosiY()][bueno.getPosiX()] = null;
@@ -176,21 +177,14 @@ public class Mapa implements Rellenar {
 
         for (Buenos bueno : buenos) {
             bueno.mover(mapa);
-        }
-
-        for (Malos malo : malos) {
-            malo.mover(mapa);
-        }
-
-        eliminarMuertos();
-
-        for (Buenos bueno : buenos) {
             mapa[bueno.getPosiY()][bueno.getPosiX()] = bueno;
         }
 
         for (Malos malo : malos) {
+            malo.mover(mapa);
             mapa[malo.getPosiY()][malo.getPosiX()] = malo;
         }
+        eliminarMuertos();
     }
 
     // Crear arraylist privada para meter los vivos con vida y separarlos de los
