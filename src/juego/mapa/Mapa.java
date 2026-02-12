@@ -37,34 +37,38 @@ public class Mapa implements Rellenar {
     }
 
     public void limpiar() {
-        System.out.print("\033[H\033[2J");
+        System.out.print("\033[H");
         System.out.flush();
     }
 
     public void pintar() {
-        System.out.print("+");
+        StringBuilder tablero = new StringBuilder();
+        
+        tablero.append("+");
         for (int i = 0; i < ancho; i++) {
-            System.out.print("-");
+            tablero.append("-");
         }
-        System.out.println("+");
+        tablero.append("+\n");
 
         for (int i = 0; i < alto; i++) {
-            System.out.print("|");
+            tablero.append("|");
             for (int j = 0; j < ancho; j++) {
                 if (mapa[i][j] == null) {
-                    System.out.print(" ");
+                    tablero.append(" ");
                 } else {
-                    System.out.print(mapa[i][j]);
+                    tablero.append(mapa[i][j]);
                 }
             }
-            System.out.println("|");
+            tablero.append("|\n");
         }
 
-        System.out.print("+");
+        tablero.append("+");
         for (int i = 0; i < ancho; i++) {
-            System.out.print("-");
+            tablero.append("-");
         }
-        System.out.println("+");
+        tablero.append("+");
+
+        System.out.println(tablero.toString());
     }
 
     public void generarElementos() {
